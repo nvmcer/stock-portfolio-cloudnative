@@ -32,4 +32,15 @@ public class UserService {
     user.setPasswordHash(passwordEncoder.encode(rawPassword));
     return userRepository.save(user);
   }
+
+  public User login(String username, String rawPassword) {
+    User user = userRepository.findByUsername(username)
+        .orElseThrow(() -> new IllegalArgumentException("Username not found"));
+
+    if (!passwordEncoder.matches(rawPassword, user.getPasswordHash())) {
+      throw new IllegalArgumentException("Invalid password");
+    }
+    
+    return user;
+  }
 }

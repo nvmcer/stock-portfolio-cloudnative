@@ -38,7 +38,7 @@ public class AuthController {
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody LoginRequestDto request) {
     User user = userService.login(request.getUsername(), request.getPassword());
-    String token = jwtUtil.generateToken(user.getUsername());
+    String token = jwtUtil.generateToken(user.getUsername(), user.getRole());
     return ResponseEntity.ok(Map.of(
       "message", "Login successful", 
       "token", token

@@ -30,6 +30,12 @@ public class User {
     @Column(name = "password_hash", nullable = false, length = 255)
     private String passwordHash;
 
+    @NotBlank
+    @Size(max = 50)
+    @Column(name = "role", nullable = false, length = 50)
+    private String role;
+
+
     @Size(max = 50)
     @Column(name = "created_user", length = 50)
     private String createdUser;
@@ -110,5 +116,13 @@ public class User {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = "com")
-@EnableJpaRepositories(basePackages = "com.user.repository")
-@EntityScan(basePackages = "com.user.entity")
+@EnableJpaRepositories(basePackages = "com")
+@EntityScan(basePackages = "com")
 public class StockManagerApplication {
 
 	public static void main(String[] args) {

@@ -1,5 +1,7 @@
 package com.stock.dto;
 
+import java.math.BigDecimal;
+
 import jakarta.validation.constraints.NotBlank;
 
 public class StockRequestDto {
@@ -11,7 +13,7 @@ public class StockRequestDto {
     private String name;
 
     @NotBlank
-    private Double price;
+    private BigDecimal price;
 
     public String getSymbol() {
         return symbol;
@@ -29,11 +31,11 @@ public class StockRequestDto {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

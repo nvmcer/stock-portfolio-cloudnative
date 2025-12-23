@@ -1,8 +1,10 @@
 package com.stock.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,16 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.stock.dto.StockRequestDto;
 import com.stock.dto.StockResponseDto;
+import com.stock.service.PriceUpdateService;
 import com.stock.service.StockService;
 
 @RestController
 @RequestMapping("/api/stocks")
 public class StockController {
-    @Autowired
     private final StockService stockService;
+    private final PriceUpdateService priceUpdateService;
 
-    public StockController(StockService stockService) {
+    @Autowired
+    public StockController(StockService stockService, PriceUpdateService priceUpdateService) {
         this.stockService = stockService;
+        this.priceUpdateService = priceUpdateService;
     }
 
     @GetMapping
@@ -58,5 +63,11 @@ public class StockController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         stockService.delete(id);
+    }
+    
+    @PostMapping("/update-prices")
+    public ResponseEntity<?> updatePrices() {
+        priceUpdateService.updateAllPrices();
+        return ResponseEntity.ok(Map.of("message", "Update Stock Prices Successful"));
     }
 }
